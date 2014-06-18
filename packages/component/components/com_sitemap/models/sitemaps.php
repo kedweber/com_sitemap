@@ -18,7 +18,7 @@ class ComSitemapModelSitemaps extends KModelAbstract
             ->insert('package', 'string', null, true)
             ->insert('name', 'string', null, true)
             ->insert('urlset_limit', 'int', null, true)
-            ->insert('urlser_offset', 'int', null, true);
+            ->insert('urlset_offset', 'int', null, true);
     }
 
     public function getList()
