@@ -16,7 +16,9 @@ class ComSitemapModelSitemaps extends KModelAbstract
 
         $this->_state
             ->insert('package', 'string', null, true)
-            ->insert('name', 'string', null, true);
+            ->insert('name', 'string', null, true)
+            ->insert('urlset_limit', 'int', null, true)
+            ->insert('urlser_offset', 'int', null, true);
     }
 
     public function getList()
@@ -39,7 +41,7 @@ class ComSitemapModelSitemaps extends KModelAbstract
                     $item = $model->offset($i)->getList()->top();
 
                     $sitemap = new stdClass();
-                    $sitemap->loc = JUri::root() . 'index.php?option=com_sitemap&view=sitemap&offset='. $i . '&limit=500&package=' . $identifier->package .'&name=' . $identifier->name . '&format=xml';
+                    $sitemap->loc = JUri::root() . 'index.php?option=com_sitemap&view=sitemap&urlset_offset='. $i . '&urlset_limit=500&package=' . $identifier->package .'&name=' . $identifier->name . '&format=xml';
                     $sitemap->lastmod = $item->modified_on;
 
                     array_push($this->_list['sitemapindex'], $sitemap);
@@ -68,7 +70,7 @@ class ComSitemapModelSitemaps extends KModelAbstract
                 $identifier->name = $config->name;
 
                 $model = $this->getService($identifier);
-                $items = $model->sort('modified_on')->direction('asc')->limit($state->limit)->offset($state->offset)->getList();
+                $items = $model->sort('modified_on')->direction('asc')->limit($state->urlset_limit)->offset($state->urlset_offset)->getList();
 
                 $router = JApplicationSite::getRouter();
 
