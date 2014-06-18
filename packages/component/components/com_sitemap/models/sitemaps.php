@@ -91,7 +91,7 @@ class ComSitemapModelSitemaps extends KModelAbstract
                     } else if ($timeDiff->d > 2) {
                         $url->changefreq = 'weekly';
                     } else {
-                        $url->changefreq = 'dayly';
+                        $url->changefreq = 'daily';
                     }
 
                     array_push($this->_item->urlset, $url);
