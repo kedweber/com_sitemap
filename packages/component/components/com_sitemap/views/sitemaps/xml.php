@@ -12,7 +12,7 @@ class ComSitemapViewSitemapsXml extends KViewAbstract
 {
     public function display()
     {
-        header('Content-type: application/xml');
+		header('Content-Type: application/xml');
 
         $list = $this->getModel()->getList();
 
@@ -27,6 +27,8 @@ class ComSitemapViewSitemapsXml extends KViewAbstract
             $xmlSitemap->addChild('lastmod', $date->format('Y-m-d\TH:i:s'));
         }
 
-        return $xmlRoot->asXML();
+		// This forces no caching!
+        echo $xmlRoot->asXML();
+		exit;
     }
 }
