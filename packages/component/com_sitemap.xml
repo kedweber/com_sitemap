@@ -23,14 +23,12 @@
     </uninstall>
 
     <files folder="components/com_sitemap">
-        <file>dispatcher.php</file>
         <file>sitemap.php</file>
 
         <folder>databases</folder>
         <folder>controllers</folder>
         <folder>views</folder>
         <folder>models</folder>
-        <folder>language</folder>
     </files>
 
     <administration>
