@@ -21,6 +21,40 @@ class ComSitemapModelSitemaps extends KModelAbstract
             ->insert('urlset_offset', 'int', null, true);
     }
 
+    private static function getLastMod($config = array())
+    {
+        $config = new KConfig($config);
+        $config->append(array(
+            'sequence' => array('modified_on', 'publish_up', 'created_on'),
+            'default' => ''
+        ));
+        $item = $config->item;
+
+        $date = $config->default;
+
+        foreach($config->sequence as $property) {
+            if ($item->$property && $item->$property != '0000-00-00 00:00:00') {
+                $date = $item->$property;
+                break;
+            }
+        }
+
+        return $date;
+    }
+
+    private static function getLoc($config = array())
+    {
+        $config = new KConfig($config);
+        $config->append(array(
+            'route' => array(
+                'id' => ':id'
+            )
+        ));
+        $item = $config->item;
+
+        return JURI::base().substr(JRoute::_('index.php?option=com_'. $item->getIdentifier()->package . '&view=' . $item->getIdentifier()->name . '&id=' . $item->id), strlen(JURI::base(true)) + 1);
+    }
+
     public function getList()
     {
         if (!$this->_list) {
@@ -29,20 +63,23 @@ class ComSitemapModelSitemaps extends KModelAbstract
             $configs = $this->getService('com://site/sitemap.model.configs')->limit(0)->getList();
 
             foreach($configs as $config) {
+                // Get model identifier
                 $identifier = clone $this->getIdentifier();
                 $identifier->package = $config->package;
                 $identifier->name = $config->name;
 
+                // Get total
                 $model = $this->getService($identifier);
                 $total = $model->getTotal();
                 $model->sort('modified_on')->direction('asc')->limit(1);
 
                 for($i = 0; $i < $total;) {
+                    // Get first item for lastmod
                     $item = $model->offset($i)->getList()->top();
 
                     $sitemap = new stdClass();
                     $sitemap->loc = JUri::root() . 'index.php?option=com_sitemap&view=sitemap&urlset_offset='. $i . '&urlset_limit=500&package=' . $identifier->package .'&name=' . $identifier->name . '&format=xml';
-                    $sitemap->lastmod = $item->modified_on;
+                    $sitemap->lastmod = self::getLastMod(array('item' => $item));
 
                     array_push($this->_list['sitemapindex'], $sitemap);
 
@@ -65,25 +102,23 @@ class ComSitemapModelSitemaps extends KModelAbstract
             if ($state->package && $state->name) {
                 $config = $this->getService('com://site/sitemap.model.configs')->package($state->package)->name($state->name)->getItem();
 
+                // Get model identifier
                 $identifier = clone $this->getIdentifier();
                 $identifier->package = $config->package;
                 $identifier->name = $config->name;
 
+                // Get items
                 $model = $this->getService($identifier);
                 $items = $model->sort('modified_on')->direction('asc')->limit($state->urlset_limit)->offset($state->urlset_offset)->getList();
 
-                $router = JApplicationSite::getRouter();
-
                 foreach($items as $item) {
                     $url = new stdClass();
-                    $route = $router->build('index.php?option=com_'. $item->getIdentifier()->package . '&view=' . $item->getIdentifier()->name . '&id=' . $item->id);
-                    $uri = JUri::getInstance();
 
-                    $url->loc = $uri->getScheme() . '://' . $uri->getHost() . $route;
-                    $url->lastmod = $item->modified_on;
+                    $url->loc = self::getLoc(array('item' => $item));
+                    $url->lastmod = self::getLastMod(array('item' => $item));
 
+                    // Calculate changefreq
                     $timeDiff = date_diff(new DateTime(), new DateTime($item->modified_on));
-
                     if (!$timeDiff || $timeDiff->m > 1 || $timeDiff->y > 1) {
                         $url->changefreq = 'yearly';
                     } else if ($timeDiff->d > 7) {

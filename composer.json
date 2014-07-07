@@ -1,0 +1,17 @@
+{
+    "name": "moyo/sitemap",
+    "type": "joomlatools-installer",
+    "description": "Sitemap Package",
+    "keywords": ["joomla", "sitemap"],
+    "homepage": "https://moyoweb.assembla.com/code/moyo-content/git-2/nodes",
+    "authors": [
+        {
+            "name": "Joep van der Heijden",
+            "email": "joep@moyoweb.nl",
+            "homepage": "http://www.moyoweb.nl"
+        }
+    ],
+    "require": {
+        "joomlatools/installer": "*"
+    }
+}
