@@ -12,7 +12,7 @@ class ComSitemapViewSitemapXml extends KViewAbstract
 {
     public function display()
     {
-        header('Content-type: application/xml');
+        header('Content-Type: application/xml');
 
         $sitemap = $this->getModel()->getItem();
 
@@ -22,10 +22,11 @@ class ComSitemapViewSitemapXml extends KViewAbstract
             $xmlUrl = $xmlRoot->addChild('url');
             $xmlUrl->addChild('loc', htmlentities($url->loc));
             $date = new DateTime($url->lastmod);
-            $xmlUrl->addChild('lastmod', $date->format('Y-m-d\TH:i:s'));
+            $xmlUrl->addChild('lastmod', $date->format('Y-m-d'));
             $xmlUrl->addChild('changefreq', $url->changefreq);
         }
 
-        return $xmlRoot->asXML();
+        echo $xmlRoot->asXML();
+		exit;
     }
 }
