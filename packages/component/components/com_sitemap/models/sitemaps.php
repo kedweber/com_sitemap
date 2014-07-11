@@ -105,7 +105,7 @@ class ComSitemapModelSitemaps extends KModelAbstract
                 // Get model identifier
                 $identifier = clone $this->getIdentifier();
                 $identifier->package = $config->package;
-                $identifier->name = $config->name;
+                $identifier->name = KInflector::pluralize($config->name);
 
                 // Get items
                 $model = $this->getService($identifier);
