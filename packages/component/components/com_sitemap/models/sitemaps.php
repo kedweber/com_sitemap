@@ -52,7 +52,10 @@ class ComSitemapModelSitemaps extends KModelAbstract
         ));
         $item = $config->item;
 
-        return JURI::base().substr(JRoute::_('index.php?option=com_'. $item->getIdentifier()->package . '&view=' . $item->getIdentifier()->name . '&id=' . $item->id), strlen(JURI::base(true)) + 1);
+        // strip www:
+        $base = preg_replace('|www\.[a-z\.0-9]+|i', '', JURI::base());
+
+        return $base . substr(JRoute::_('index.php?option=com_'. $item->getIdentifier()->package . '&view=' . $item->getIdentifier()->name . '&id=' . $item->id), strlen(JURI::base(true)) + 1);
     }
 
     public function getList()
