@@ -1,9 +1,9 @@
 {
-    "name": "moyo/sitemap",
+    "name": "cta/sitemap",
     "type": "joomlatools-installer",
     "description": "Sitemap Package",
     "keywords": ["joomla", "sitemap"],
-    "homepage": "https://moyoweb.assembla.com/code/moyo-content/git-2/nodes",
+    "homepage": "https://github.com/cta-int/sitemap",
     "authors": [
         {
             "name": "Joep van der Heijden",
