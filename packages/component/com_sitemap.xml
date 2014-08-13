@@ -25,10 +25,10 @@
     <files folder="components/com_sitemap">
         <file>sitemap.php</file>
 
-        <folder>databases</folder>
         <folder>controllers</folder>
-        <folder>views</folder>
+        <folder>databases</folder>
         <folder>models</folder>
+        <folder>views</folder>
     </files>
 
     <administration>
