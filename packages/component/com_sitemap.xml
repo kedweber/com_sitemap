@@ -8,7 +8,7 @@
     <license>GNU GPLv3 - http://www.gnu.org/licenses/gpl.html</license>
     <authorEmail>joep.van.der.heijden@moyoweb.nl</authorEmail>
     <authorUrl>www.moyoweb.nl</authorUrl>
-    <version>1.0.0</version>
+    <version>1.0.4</version>
     <description>Config manager for sitemap</description>
 
     <install>
@@ -23,14 +23,12 @@
     </uninstall>
 
     <files folder="components/com_sitemap">
-        <file>dispatcher.php</file>
         <file>sitemap.php</file>
 
-        <folder>databases</folder>
         <folder>controllers</folder>
-        <folder>views</folder>
+        <folder>databases</folder>
         <folder>models</folder>
-        <folder>language</folder>
+        <folder>views</folder>
     </files>
 
     <administration>

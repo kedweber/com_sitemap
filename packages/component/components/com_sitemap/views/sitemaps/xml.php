@@ -24,7 +24,7 @@ class ComSitemapViewSitemapsXml extends KViewAbstract
             $xmlSitemap = $xmlRoot->addChild('sitemap');
             $xmlSitemap->addChild('loc', htmlentities($sitemap->loc));
             $date = new DateTime($sitemap->lastmod);
-            $xmlSitemap->addChild('lastmod', $date->format('Y-m-d\TH:i:s'));
+            $xmlSitemap->addChild('lastmod', $date->format('Y-m-d'));
         }
 
 		// This forces no caching!

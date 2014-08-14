@@ -52,7 +52,10 @@ class ComSitemapModelSitemaps extends KModelAbstract
         ));
         $item = $config->item;
 
-        return JURI::base().substr(JRoute::_('index.php?option=com_'. $item->getIdentifier()->package . '&view=' . $item->getIdentifier()->name . '&id=' . $item->id), strlen(JURI::base(true)) + 1);
+        // strip www:
+        $base = str_replace('www.', '', JURI::base());
+
+        return $base . substr(JRoute::_('index.php?option=com_'. $item->getIdentifier()->package . '&view=' . $item->getIdentifier()->name . '&id=' . $item->id), strlen(JURI::base(true)) + 1);
     }
 
     public function getList()
@@ -105,7 +108,7 @@ class ComSitemapModelSitemaps extends KModelAbstract
                 // Get model identifier
                 $identifier = clone $this->getIdentifier();
                 $identifier->package = $config->package;
-                $identifier->name = $config->name;
+                $identifier->name = KInflector::pluralize($config->name);
 
                 // Get items
                 $model = $this->getService($identifier);

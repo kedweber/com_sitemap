@@ -1,0 +1,17 @@
+{
+    "name": "cta/sitemap",
+    "type": "joomlatools-installer",
+    "description": "Sitemap Package",
+    "keywords": ["joomla", "sitemap"],
+    "homepage": "https://github.com/cta-int/sitemap",
+    "authors": [
+        {
+            "name": "Joep van der Heijden",
+            "email": "joep@moyoweb.nl",
+            "homepage": "http://www.moyoweb.nl"
+        }
+    ],
+    "require": {
+        "joomlatools/installer": "*"
+    }
+}
