@@ -33,8 +33,6 @@ class ComSitemapModelSitemaps extends KModelAbstract
         $date = $config->default;
 
         foreach($config->sequence as $property) {
-            var_dump($property);
-
             if ($item->$property && $item->$property != '0000-00-00 00:00:00') {
                 $date = $item->$property;
                 break;
