@@ -5,7 +5,7 @@
  *
  * @author 		Joep van der Heijden <joep.van.der.heijden@moyoweb.nl>
  */
- 
+
 defined('KOOWA') or die('Restricted Access');
 
 class ComSitemapModelSitemaps extends KModelAbstract
@@ -33,6 +33,8 @@ class ComSitemapModelSitemaps extends KModelAbstract
         $date = $config->default;
 
         foreach($config->sequence as $property) {
+            var_dump($property);
+
             if ($item->$property && $item->$property != '0000-00-00 00:00:00') {
                 $date = $item->$property;
                 break;
@@ -74,7 +76,7 @@ class ComSitemapModelSitemaps extends KModelAbstract
                 // Get total
                 $model = $this->getService($identifier);
                 $total = $model->getTotal();
-                $model->sort('modified_on')->direction('asc')->limit(1);
+                $model->sort('modified_on')->direction('desc')->limit(1);
 
                 for($i = 0; $i < $total;) {
                     // Get first item for lastmod
@@ -112,7 +114,7 @@ class ComSitemapModelSitemaps extends KModelAbstract
 
                 // Get items
                 $model = $this->getService($identifier);
-                $items = $model->sort('modified_on')->direction('asc')->limit($state->urlset_limit)->offset($state->urlset_offset)->getList();
+                $items = $model->sort('modified_on')->direction('desc')->limit($state->urlset_limit)->offset($state->urlset_offset)->getList();
 
                 foreach($items as $item) {
                     $url = new stdClass();
