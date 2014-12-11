@@ -2,7 +2,7 @@
     "name": "cta/sitemap",
     "type": "joomlatools-installer",
     "description": "Sitemap Package",
-    "keywords": ["joomla", "sitemap"],
+    "keywords": ["joomla", "nooku","sitemap"],
     "homepage": "https://github.com/cta-int/sitemap",
     "authors": [
         {
