@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="package" version="1.6">
     <name>Sitemap</name>
-    <author>Joep van der Heijden</author>
+    <author>Moyo Web Architects</author>
     <creationDate>June 2014</creationDate>
     <packagename>sitemap</packagename>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <url>http://www.moyoweb.nl/</url>
     <packager>Joep van der Heijden</packager>
     <packagerurl>http://www.moyoweb.nl/</packagerurl>
