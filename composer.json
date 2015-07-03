@@ -1,9 +1,9 @@
 {
-    "name": "cta/sitemap",
+    "name": "moyo/sitemap",
     "type": "joomlatools-installer",
     "description": "Sitemap Package",
     "keywords": ["joomla", "nooku","sitemap"],
-    "homepage": "https://github.com/cta-int/sitemap",
+    "homepage": "https://github.com/moyoweb/sitemap",
     "authors": [
         {
             "name": "Joep van der Heijden",
